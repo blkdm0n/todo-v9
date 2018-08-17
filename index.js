@@ -13,20 +13,6 @@ var todoList = {
       completed: false
     }
   ],
-  displayTodos: function() {
-    console.log(`My Todos:`);
-    if (!this.todos.length) {
-      console.log(`Your todo list is empty!`);
-    } else {
-      for (let i = 0; i < this.todos.length; i++) {
-        if (this.todos[i].completed === true) {
-          console.log(`[X] ${this.todos[i].todoText}`);
-        } else {
-          console.log(`[ ] ${this.todos[i].todoText}`);
-        }
-      }
-    }
-  },
   addTodo: function(todoText) {
     if (todoText) {
       this.todos.push({
@@ -36,7 +22,6 @@ var todoList = {
     } else {
       console.log(`Please enter a valid todo`);
     }
-    this.displayTodos();
   },
   changeTodo: function(oldTodo, newTodo) {
     for (let i = 0; i < this.todos.length; i++) {
@@ -44,7 +29,6 @@ var todoList = {
         this.todos[i].todoText = newTodo;
       }
     }
-    this.displayTodos();
   },
   toggleCompleted: function(completedTodo) {
     for (let i = 0; i < this.todos.length; i++) {
@@ -52,7 +36,6 @@ var todoList = {
         this.todos[i].completed = !this.todos[i].completed;
       }
     }
-    this.displayTodos();
   },
   toggleAll: function() {
     var totalTodos = this.todos.length;
@@ -73,7 +56,6 @@ var todoList = {
         this.todos[i].completed = true;
       }
     }
-    this.displayTodos();
   },
   deleteTodo: function(deletedTodo) {
     for (let i = 0; i < this.todos.length; i++) {
@@ -81,16 +63,12 @@ var todoList = {
         this.todos.splice(i, 1);
       }
     }
-    this.displayTodos();
   }
 };
 
 // HANDLERS OBJECT FOR SEPARATION OF CONCERNS
 
 const handlers = {
-  displayTodos: function() {
-    todoList.displayTodos();
-  },
   toggleAll: function() {
     todoList.toggleAll();
     views.displayTodos();
@@ -124,6 +102,7 @@ const handlers = {
 };
 
 // RESPONSIBLE FOR THINGS VIEWER SEES (NO LOGIC => JUST VIEWS)
+   //ONLY CONCERNED WITH DISPLAYING TODOS
 
 const views = {
   displayTodos: function() {
@@ -143,11 +122,9 @@ const views = {
       node.appendChild(textNode);
       ul.appendChild(node);
     }
-  }
-  // addTodo: function() {
-  //   let addTodoTextInput = document.getElementById("addTodoTextInput");
-  //   todoList.addTodo(addTodoTextInput.value);
-  //   addTodoTextInput.value = "";
-  //   views.displayTodos();
-  // }
+  },
+   initialize: function () {
+     this.displayTodos() 
+   }
 };
+

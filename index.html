@@ -22,32 +22,36 @@
     <button onclick="handlers.toggleAll()">Toggle All</button>
   </div>
 
-  <div>
-    <button onclick="handlers.addTodo()">Add Todo</button>
-    <input id="addTodoTextInput" placeholder="Enter Todo" type="text">
-  </div>
+  <div id="empty-list"></div>
 
-  <div>
-    <button onclick="handlers.changeTodo()">Change Todo</button>
-    <input id="changeTodoCurrentText" placeholder="Existing Todo" type="text">
-    <input id="changeTodoNewText" placeholder="New Todo" type="text">
-  </div>
+  <ul id="todo-list"></ul>
 
-  <div>
-    <button onclick="handlers.deleteTodo()">Delete</button>
-    <input id="deleteTodoText" placeholder="Delete Todo" type="text">
-  </div>
+    <div>
+      <button onclick="handlers.addTodo()">Add Todo</button>
+      <input id="addTodoTextInput" placeholder="Enter Todo" type="text">
+    </div>
 
-  <div>
-    <button onclick="handlers.toggleCompleted()">Toggle Todo</button>
-    <input id="completedTodoText" placeholder="Completed Todo" type="text">
-  </div>
+    <div>
+      <button onclick="handlers.changeTodo()">Change Todo</button>
+      <input id="changeTodoCurrentText" placeholder="Existing Todo" type="text">
+      <input id="changeTodoNewText" placeholder="New Todo" type="text">
+    </div>
 
-  <!--[if lt IE 7]>
+    <div>
+      <button onclick="handlers.deleteTodo()">Delete</button>
+      <input id="deleteTodoText" placeholder="Delete Todo" type="text">
+    </div>
+
+    <div>
+      <button onclick="handlers.toggleCompleted()">Toggle Todo</button>
+      <input id="completedTodoText" placeholder="Completed Todo" type="text">
+    </div>
+
+    <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-  <script src="index.js" async defer></script>
+    <script src="index.js" async defer></script>
 </body>
 
 </html>

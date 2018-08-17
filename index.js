@@ -6,50 +6,23 @@ var todoList = {
     },
     {
       todoText: `second`,
-      completed: true
+      completed: false
+    },
+    {
+      todoText: `third`,
+      completed: false
     }
   ],
-  // displayTodos: function () {
-  //   console.log(`My Todos:`)
-  //   if (!this.todos.length) {
-  //     console.log(`Your todo list is empty!`);
-  //   } else {
-  //     for (let i = 0; i < this.todos.length; i++) {
-  //       if (this.todos[i].completed === true) {
-  //         console.log(`[X] ${this.todos[i].todoText}`);
-  //       } else {
-  //         console.log(`[ ] ${this.todos[i].todoText}`)
-  //       }
-  //     }
-  //   }
-  // },
   displayTodos: function() {
-    //REQ #1 COMPLETE W/ PROBLEMS
-    //if list is empty how do i avoid repeat messages (same goes for the actual todos)
+    console.log(`My Todos:`);
     if (!this.todos.length) {
-      //create an h1
-      let node = document.createElement("h3");
-      //create a textNode to store our string
-      let textNode = document.createTextNode(`Your todo list is currently empty`);
-      //add the textNode to the node
-      node.appendChild(textNode);
-      //grab the todo-list id and append the node
-      document.getElementById(`empty-list`).appendChild(node);
+      console.log(`Your todo list is empty!`);
     } else {
-      //loop through the array of todos
-      //create an <li> for each todo text
       for (let i = 0; i < this.todos.length; i++) {
-        let node = document.createElement("li");
         if (this.todos[i].completed === true) {
-          let textNode = document.createTextNode(`${this.todos[i].todoText}, completed: ${this.todos[i].completed}`);
-          node.appendChild(textNode);
-          document.getElementById(`todo-list`).appendChild(node);
+          console.log(`[X] ${this.todos[i].todoText}`);
         } else {
-          let textNode = document.createTextNode(
-            `${this.todos[i].todoText.toUpperCase()} completed: ${this.todos[i].completed}`
-          );
-          node.appendChild(textNode);
-          document.getElementById(`todo-list`).appendChild(node);
+          console.log(`[ ] ${this.todos[i].todoText}`);
         }
       }
     }
@@ -120,12 +93,13 @@ const handlers = {
   },
   toggleAll: function() {
     todoList.toggleAll();
+    views.displayTodos();
   },
   addTodo: function() {
     let addTodoTextInput = document.getElementById("addTodoTextInput");
     todoList.addTodo(addTodoTextInput.value);
-    console.log(`ADD TODO TEXT  ${addTodoTextInput.value}`);
     addTodoTextInput.value = "";
+    views.displayTodos();
   },
   changeTodo: function() {
     let changeTodoCurrentText = document.getElementById("changeTodoCurrentText");
@@ -133,15 +107,47 @@ const handlers = {
     todoList.changeTodo(changeTodoCurrentText.value, changeTodoNewText.value);
     changeTodoCurrentText.value = "";
     changeTodoNewText.value = "";
+    views.displayTodos();
   },
   deleteTodo: function() {
     let deleteTodoText = document.getElementById("deleteTodoText");
     todoList.deleteTodo(deleteTodoText.value);
     deleteTodoText.value = "";
+    views.displayTodos();
   },
   toggleCompleted: function() {
     let completedTodoText = document.getElementById("completedTodoText");
     todoList.toggleCompleted(completedTodoText.value);
     completedTodoText.value = "";
+    views.displayTodos();
   }
+};
+
+// RESPONSIBLE FOR THINGS VIEWER SEES (NO LOGIC => JUST VIEWS)
+
+const views = {
+  displayTodos: function() {
+    var node;
+    var textNode;
+    var ul = document.getElementById(`todo-list`);
+    //  Clears list so we don't end up with duplicate lists
+    ul.innerHTML = "";
+    for (let i = 0; i < todoList.todos.length; i++) {
+      if (todoList.todos[i].completed === true) {
+        textNode = document.createTextNode(`[X] ${todoList.todos[i].todoText}`);
+        node = document.createElement(`li`);
+      } else {
+        textNode = document.createTextNode(`[ ] ${todoList.todos[i].todoText}`);
+        node = document.createElement(`li`);
+      }
+      node.appendChild(textNode);
+      ul.appendChild(node);
+    }
+  }
+  // addTodo: function() {
+  //   let addTodoTextInput = document.getElementById("addTodoTextInput");
+  //   todoList.addTodo(addTodoTextInput.value);
+  //   addTodoTextInput.value = "";
+  //   views.displayTodos();
+  // }
 };

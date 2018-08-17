@@ -1,3 +1,5 @@
+// DATA AND METHODS THAT CHANGE DATA => SPECIFIC
+
 var todoList = {
   todos: [
     {
@@ -66,7 +68,7 @@ var todoList = {
   }
 };
 
-// HANDLERS OBJECT FOR SEPARATION OF CONCERNS
+// HANDLERS OBJECT FOR `HANDLING` USER INTERACTION
 
 const handlers = {
   toggleAll: function() {
@@ -102,7 +104,6 @@ const handlers = {
 };
 
 // RESPONSIBLE FOR THINGS VIEWER SEES (NO LOGIC => JUST VIEWS)
-   //ONLY CONCERNED WITH DISPLAYING TODOS
 
 const views = {
   displayTodos: function() {
@@ -123,8 +124,7 @@ const views = {
       ul.appendChild(node);
     }
   },
-   initialize: function () {
-     this.displayTodos() 
-   }
+  initialize: function() {
+    this.displayTodos();
+  }
 };
-
